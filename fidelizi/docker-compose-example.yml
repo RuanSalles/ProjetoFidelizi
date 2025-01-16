@@ -1,0 +1,45 @@
+version: '3.7'
+
+# Networks
+networks:
+  # Internal network
+  internal:
+    driver: bridge
+
+volumes:
+  fidelizi-api-mysql_data:
+    driver: local
+
+# Services
+services:
+
+  # Nginx
+  fidelizi-api-nginx:
+    image: webdevops/php-nginx-dev:8.3-alpine
+    container_name: fidelizi-api-nginx
+    networks:
+      - internal
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - .docker/opt/docker/etc/supervisor.d/php-fpm.conf:/opt/docker/etc/supervisor.d/php-fpm.conf
+    ports:
+      - "80:80"
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/public
+      - WEB_DOCUMENT_INDEX=index.php
+
+  fidelizi-api-mysql:
+    image: mysql:8.2
+    container_name: fidelizi-api-mysql
+    networks:
+      - internal
+    volumes:
+      - fidelizi-api-mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=database
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
