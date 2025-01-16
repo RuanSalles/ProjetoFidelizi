@@ -7,11 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ *
+ */
 class RescueAward extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
+    /**
+     * @var string
+     */
     protected $table = 'rescue_awards';
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'customer_id',
         'award_id',

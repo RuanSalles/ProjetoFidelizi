@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ *
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -47,11 +50,17 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * @return void
+     */
     public function transactions()
     {
         $this->hasMany(Transaction::class, 'user_id');
     }
 
+    /**
+     * @return void
+     */
     public function customer()
     {
         $this->hasOne(Customer::class, 'user_id');

@@ -7,11 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ *
+ */
 class Award extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * @var string
+     */
     protected $table = 'awards';
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'description',
