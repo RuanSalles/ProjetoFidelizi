@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CustomerCollection;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,17 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return response()->json(Customer::with('user')->get(), 200);
+        try {
+            $customers = Customer::with('user')->get();
+
+            if (!isset($customers)) {
+                throw new \Exception("Não foram encontrados registros");
+            }
+            return new CustomerCollection($customers, 'Lista carregada com sucesso!', 200);
+        } catch (\Exception $e) {
+            return new CustomerCollection([], $e->getMessage(), '500');
+        }
+
     }
 
     /**
@@ -20,7 +31,12 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json(Customer::create($request->all()), 201);
+        try {
+            return response()->json(Customer::create($request->all()), 201);
+        } catch (\Exception $e) {
+            return new CustomerCollection([], $e->getMessage(), '500');
+        }
+
     }
 
     /**
