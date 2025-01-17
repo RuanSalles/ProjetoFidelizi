@@ -60,15 +60,7 @@ class User extends Authenticatable
         $this->hasMany(Transaction::class, 'user_id');
     }
 
-    /**
-     * @return void
-     */
-    public function customer()
-    {
-        $this->hasOne(Customer::class, 'user_id');
-    }
-
-    public function scopeFidelityProgramActive(Builder $query)
+    public function scopeUsersFidelityProgramActive(Builder $query)
     {
         return $query->where('fidelity_program', true);
     }

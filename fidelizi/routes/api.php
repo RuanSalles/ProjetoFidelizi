@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AwardController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\BearerTokenMiddleware;
 use App\Models\User;
@@ -16,7 +17,11 @@ Route::get('/user', function (Request $request) {
 Route::get('/awards', [AwardController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/awards/{id}', [AwardController::class, 'show']);
-Route::get('fidelityActiveUsers', [UserController::class, 'getActiveFidelityUsers']);
+Route::get('fidelityActiveUsers', [UserController::class, 'getUsersActiveFidelityUsers']);
 Route::get('/activeUserFidelityProgram/{id}', [UserController::class, 'activeUserFidelityProgram']);
+Route::apiResource('/customers', CustomerController::class);
+Route::get('customers/getPoints/{id}', [CustomerController::class, 'getPoints']);
+Route::put('customers/addPoints/{id}', [CustomerController::class, 'addPoints']);
+Route::put('customers/debitPoints/{id}', [CustomerController::class, 'debitPoints']);
 
 

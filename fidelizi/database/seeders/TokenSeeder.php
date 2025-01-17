@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\Token;
 use Illuminate\Support\Facades\DB;
 
+/**
+ *
+ */
 class TokenSeeder extends Seeder
 {
     /**

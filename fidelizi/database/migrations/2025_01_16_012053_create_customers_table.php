@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->integer('credit_points');
-            $table->integer('debit_points');
-            $table->enum('action', ['credit', 'debit']);
-            $table->dateTime('last_transaction_date');
+            $table->integer('points');
             $table->timestamps();
         });
     }

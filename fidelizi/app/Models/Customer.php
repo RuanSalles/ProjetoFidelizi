@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,10 +26,7 @@ class Customer extends Model
      */
     protected $fillable = [
         'user_id',
-        'credit_points',
-        'debit_points',
-        'action',
-        'last_transaction_date',
+        'points',
     ];
 
     /**
@@ -44,20 +42,18 @@ class Customer extends Model
      * @param $points
      * @return void
      */
-    public function addPoints(Customer $customer, $points)
+    public function addPoints($id, $points)
     {
-        $customer->update(['points' => $points]);
+        return Customer::where('id', $id)->update(['credit_points' => $points]);
     }
 
     /**
      * @param Customer $customer
      * @return void
      */
-    public function scopeGetPoints(Customer $customer)
+    public function scopeGetPoints(Builder $query, $id)
     {
-        DB::table('customers')
-            ->select('points')
-            ->where('id', $customer)
-            ->get('customers');
+        $query->select('points')
+        ->where('id', $id);
     }
 }
