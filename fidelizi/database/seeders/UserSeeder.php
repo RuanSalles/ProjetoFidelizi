@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'User2',
             'email' => 'user2@mail.com',
             'password' => Hash::make('senhapadrao'),
+            'fidelity_program' => false,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'fidelity_program'
     ];
 
     /**
@@ -64,6 +66,16 @@ class User extends Authenticatable
     public function customer()
     {
         $this->hasOne(Customer::class, 'user_id');
+    }
+
+    public function scopeFidelityProgramActive(Builder $query)
+    {
+        return $query->where('fidelity_program', true);
+    }
+
+    public function activeUserFidelityProgram($id)
+    {
+        User::where('id', $id)->update(['fidelity_program' => true]);
     }
 
 }

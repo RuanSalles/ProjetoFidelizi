@@ -130,6 +130,13 @@
       <path value="$PROJECT_DIR$/fidelizi/vendor/symfony/uid" />
       <path value="$PROJECT_DIR$/fidelizi/vendor/symfony/translation" />
       <path value="$PROJECT_DIR$/fidelizi/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/laravel/prompts" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/laravel/pail" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/symfony/clock" />
+      <path value="$PROJECT_DIR$/fidelizi/vendor/symfony/polyfill-php83" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
