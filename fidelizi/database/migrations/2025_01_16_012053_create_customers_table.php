@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->integer('points');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->integer('points')->default(0);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

@@ -42,7 +42,6 @@ class RescueAwardController extends Controller
                 ]
             ]);
         } catch (\Exception $e) {
-            http_response_code(400);
             return response()->json([
                 'data' => [
                     'error' => $e->getMessage(),

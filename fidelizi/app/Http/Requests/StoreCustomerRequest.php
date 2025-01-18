@@ -23,8 +23,10 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'points' => 'required|integer|min:1',
+            'points' => 'integer',
             'active' => 'boolean',
+            'name' => 'required',
+            'email' => 'required|email|unique:customers,email',
         ];
     }
 
@@ -35,6 +37,9 @@ class StoreCustomerRequest extends FormRequest
             'points.integer' => 'Points must be greater than zero',
             'points.min' => 'Points must be greater than 0',
             'active.boolean' => 'Active must be true or false',
+            'name.required' => 'Name is required',
+            'email.required' => 'Email is required',
+            'email.unique' => 'Email already exists',
         ];
     }
 

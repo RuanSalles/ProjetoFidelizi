@@ -27,6 +27,8 @@ class Customer extends Model
     protected $fillable = [
         'points',
         'active',
+        'name',
+        'email',
     ];
 
     protected $hidden = [
