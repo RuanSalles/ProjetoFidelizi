@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RescueAwardMail;
 use App\Models\Award;
 use App\Models\Balance;
 use App\Models\Customer;
@@ -9,6 +10,7 @@ use App\Models\RescueAward;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RescueAwardController extends Controller
 {
@@ -19,6 +21,8 @@ class RescueAwardController extends Controller
             $award = Award::find($request['award_id']);
 
             Customer::debitPoints($request['customer_id'], $award->points_value);
+
+            $customer = Customer::find($request['customer_id']);
 
             $balance = Balance::create([
                 'transaction_id' => '',
@@ -34,6 +38,14 @@ class RescueAwardController extends Controller
                 'debit_points' => $award->points_value,
                 'date_rescue' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
+
+            $dataMail = [
+                'customer' => $customer,
+                'recueAward' => $recueAward,
+                'award' => $award,
+            ];
+
+            dd(Mail::to($customer->email)->send(new RescueAwardMail($dataMail)));
 
             return response()->json([
                 'data' => [

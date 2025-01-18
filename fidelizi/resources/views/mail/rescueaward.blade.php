@@ -12,17 +12,17 @@
         <img src="https://via.placeholder.com/150" alt="Logo da Empresa" class="img-fluid" style="max-width: 150px;">
     </div>
     <h1 class="text-center text-primary mb-3">Pontos Resgatados!</h1>
-    <p class="text-center fs-5">Olá, <strong>Cliente!</strong></p>
+    <p class="text-center fs-5">Olá, <strong>{{ $dataMail['customer']['name'] }}!</strong></p>
     <p class="text-center fs-4">
-        Você utilizou <span class="fw-bold text-danger" style="font-size: 1.5rem;">500 pontos</span> do seu saldo.
+        Você utilizou <span class="fw-bold text-danger" style="font-size: 1.5rem;">{{ $dataMail['award']['points_value'] }} pontos</span> do seu saldo!
     </p>
     <p class="text-center text-secondary">
         Obrigado por usar o programa de fidelidade! Confira os detalhes do resgate abaixo:
     </p>
     <div class="border rounded p-3 bg-light">
-        <p><strong>Produto/Serviço:</strong> Cupom de desconto de R$ 50</p>
-        <p><strong>Pontos utilizados:</strong> 500</p>
-        <p><strong>Saldo restante:</strong> 750 pontos</p>
+        <p><strong>Produto/Serviço:</strong> {{ $dataMail['award']['name'] }}</p>
+        <p><strong>Pontos utilizados:</strong> {{ $dataMail['award']['points_value'] }}</p>
+        <p><strong>Saldo restante:</strong> {{ $dataMail['customer']['points'] }} pontos</p>
     </div>
     <div class="text-center mt-4">
         <a href="#" class="btn btn-primary btn-lg px-4">Ver Meu Saldo</a>

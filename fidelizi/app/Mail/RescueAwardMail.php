@@ -16,7 +16,7 @@ class RescueAwardMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public $dataMail)
     {
         //
     }
@@ -37,7 +37,7 @@ class RescueAwardMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.mail.rescueawardmail',
+            view: 'mail.rescueaward',
         );
     }
 

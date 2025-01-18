@@ -12,9 +12,9 @@
         <img src="https://via.placeholder.com/150" alt="Logo da Empresa" class="img-fluid" style="max-width: 150px;">
     </div>
     <h1 class="text-center text-primary mb-3">Você tem pontos acumulados!</h1>
-    <p class="text-center fs-5">Olá, <strong>Cliente!</strong></p>
+    <p class="text-center fs-5">Olá, <strong>{{ $customer['name'] }}</strong></p>
     <p class="text-center fs-4">
-        Você possui <span class="fw-bold text-success" style="font-size: 1.5rem;">1.250 pontos</span> disponíveis no seu programa de fidelidade.
+        Você possui <span class="fw-bold text-success" style="font-size: 1.5rem;"> {{ $customer['points'] }} pontos</span> disponíveis no seu programa de fidelidade.
     </p>
     <p class="text-center text-secondary">
         Aproveite agora mesmo para trocar seus pontos por descontos incríveis ou brindes exclusivos!
@@ -22,10 +22,7 @@
     <div class="text-center mt-4">
         <a href="#" class="btn btn-primary btn-lg px-4">Trocar Meus Pontos</a>
     </div>
-    <hr class="my-4">
-    <p class="text-center text-muted small">
-        Seus pontos expiram em 30 dias. Não perca essa oportunidade!
-    </p>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

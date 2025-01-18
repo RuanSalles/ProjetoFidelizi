@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Transaction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,9 +17,8 @@ class TransactionMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public $dataMail)
     {
-        //
     }
 
     /**
@@ -37,7 +37,7 @@ class TransactionMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.mail.transactionmail',
+            view: 'mail.transaction',
         );
     }
 

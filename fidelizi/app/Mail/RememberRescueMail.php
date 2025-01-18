@@ -16,7 +16,7 @@ class RememberRescueMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public $customer)
     {
         //
     }
@@ -37,7 +37,7 @@ class RememberRescueMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.mail.rememberrescuemail',
+            view: 'mail.rememberrescue',
         );
     }
 

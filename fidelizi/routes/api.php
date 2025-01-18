@@ -3,6 +3,7 @@
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\RescueAwardController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/balances', [BalanceController::class, 'index'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::get('/balances/list-for-customer/{id}', [BalanceController::class, 'balanceListForCustomer'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::post('/rescue-awards', [RescueAwardController::class, 'store']);
+    Route::get('remember-mail', [MailController::class, 'sendRememberRescueMail']);
 });
 
 
