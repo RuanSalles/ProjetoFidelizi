@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Resources\CustomerCollection;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -11,17 +12,19 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $customers = Customer::with('user')->get();
+            $customers = Customer::when(isset($request->active) && $request->active == 1, function ($query) {
+                return $query->where('active', true);
+            })->simplePaginate(20);
 
             if (!isset($customers)) {
                 throw new \Exception("Não foram encontrados registros");
             }
-            return new CustomerCollection($customers, 'Lista carregada com sucesso!', 200);
+            return new CustomerCollection($customers);
         } catch (\Exception $e) {
-            return new CustomerCollection([], $e->getMessage(), '500');
+            return response(['error' => $e->getMessage(), 'code' => $e->getCode()]);
         }
 
     }
@@ -29,10 +32,10 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCustomerRequest $request)
     {
         try {
-            return response()->json(Customer::create($request->all()), 201);
+            return response()->json(Customer::create($request->validated()), 201);
         } catch (\Exception $e) {
             return new CustomerCollection([], $e->getMessage(), '500');
         }
@@ -42,25 +45,9 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         return response()->json(Customer::find($id), 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
     public function getPoints($id)
@@ -95,5 +82,18 @@ class CustomerController extends Controller
             return response()->json(['error' => $e->getMessage(), 'code' => $e->getCode()], 500);
         }
 
+    }
+    public function activateCustomer($id)
+    {
+        $customer = Customer::find($id);
+        $customer->update(['active' => true]);
+        return response()->json($customer, '200');
+    }
+
+    public function deactivateCustomer($id)
+    {
+        $customer = Customer::find($id);
+        $customer->update(['active' => false]);
+        return response()->json($customer, '200');
     }
 }

@@ -27,4 +27,9 @@ class RescueAward extends Model
         'debit_points',
         'date_rescue',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

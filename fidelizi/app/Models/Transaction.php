@@ -22,10 +22,14 @@ class Transaction extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_id',
         'customer_id',
         'amount',
         'generated_points',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -41,5 +45,18 @@ class Transaction extends Model
      */
     public function customer() {
         $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    /**
+     * @return void
+     */
+    public function balances()
+    {
+        $this->hasMany(Balance::class, 'transaction_id');
+    }
+
+    static function calculatePoints($amount)
+    {
+        return intval(floor($amount / 5));
     }
 }

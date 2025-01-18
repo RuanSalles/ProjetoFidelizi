@@ -9,7 +9,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::all(), 200);
+        return response()->json(User::simplePaginate(), 200);
+
     }
 
     public function show($id)
@@ -17,15 +18,5 @@ class UserController extends Controller
         return response()->json(User::find($id), 200);
     }
 
-    public function getUsersActiveFidelityUsers()
-    {
-        return response()->json(User::UsersFidelityProgramActive()->orderBy('id')->get(), 200);
-    }
 
-    public function activeUserFidelityProgram($id)
-    {
-        User::where('id', $id)->update(['fidelity_program' => true]);
-
-        return response()->json(User::where('id', $id)->update(['fidelity_program' => true]), '200');
-    }
 }

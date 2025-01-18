@@ -26,4 +26,9 @@ class Award extends Model
         'description',
         'points_value',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

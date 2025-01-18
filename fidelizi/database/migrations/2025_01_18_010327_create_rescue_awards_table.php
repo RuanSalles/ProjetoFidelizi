@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('rescue_awards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->decimal('amount', 8, 2)->default(0);
-            $table->integer('generated_points');
+            $table->foreignId('award_id')->constrained('awards');
+            $table->integer('debit_points');
+            $table->date('date_rescue');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('rescue_awards');
     }
 };

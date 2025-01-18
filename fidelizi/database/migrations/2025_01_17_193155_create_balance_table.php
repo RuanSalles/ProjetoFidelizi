@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('balance', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->decimal('amount', 8, 2)->default(0);
-            $table->integer('generated_points');
+            $table->string('transaction_id')->nullable();
+            $table->integer('points');
+            $table->enum('action', ['debit', 'credit'])->default('credit');
+            $table->date('date_transaction');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('balances');
     }
 };

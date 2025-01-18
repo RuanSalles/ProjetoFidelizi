@@ -37,6 +37,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -60,10 +62,7 @@ class User extends Authenticatable
         $this->hasMany(Transaction::class, 'user_id');
     }
 
-    public function scopeUsersFidelityProgramActive(Builder $query)
-    {
-        return $query->where('fidelity_program', true);
-    }
+
 
     public function activeUserFidelityProgram($id)
     {

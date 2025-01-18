@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -25,26 +25,41 @@ class Customer extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_id',
         'points',
+        'active',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * @param Customer $customer
      * @param $points
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function addPoints($id, $points)
+    static function addPoints($id, $points)
     {
-        return Customer::where('id', $id)->update(['credit_points' => $points]);
+        $customer = Customer::find($id);
+        $points = $customer->points += $points;
+        $customer->update(['points' => $points]);
+
+        return response()->json($customer);
+    }
+
+    static function debitPoints($id, $points)
+    {
+        $customer = Customer::find($id);
+
+        if(!self::checkPointsRescue($id, $points)) {
+            throw new Exception("Don't have enough points");
+        }
+
+        $points = $customer->points -= $points;
+        $customer->update(['points' => $points]);
+
+        return response()->json($customer);
     }
 
     /**
@@ -54,6 +69,20 @@ class Customer extends Model
     public function scopeGetPoints(Builder $query, $id)
     {
         $query->select('points')
-        ->where('id', $id);
+            ->where('id', $id);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    static function checkPointsRescue($id, $points)
+    {
+        $customer = Customer::find($id);
+        if ($customer->points < $points) {
+            return false;
+        }
+        return true;
     }
 }
