@@ -22,9 +22,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/awards', [AwardController::class, 'index']);
     Route::get('/awards/{id}', [AwardController::class, 'show']);
     Route::post('/transactions', [TransactionController::class, 'store'])->middleware(['auth:sanctum', 'abilities:point-create']);
+    Route::get('/transactions', [TransactionController::class, 'index'])->middleware(['auth:sanctum', 'abilities:point-create']);
     Route::get('/balances', [BalanceController::class, 'index'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::get('/balances/list-for-customer/{id}', [BalanceController::class, 'balanceListForCustomer'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::post('/rescue-awards', [RescueAwardController::class, 'store']);
+    Route::get('/rescue-awards', [RescueAwardController::class, 'index']);
     Route::get('remember-mail', [MailController::class, 'sendRememberRescueMail']);
 });
 

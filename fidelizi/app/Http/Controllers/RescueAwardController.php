@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RescueAwardCollection;
 use App\Mail\RescueAwardMail;
 use App\Models\Award;
 use App\Models\Balance;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Mail;
 
 class RescueAwardController extends Controller
 {
+
+    public function index()
+    {
+        return response([
+            'data' => new RescueAwardCollection(RescueAward::all()),
+        ]);
+    }
     public function store(Request $request): JsonResponse
     {
 
@@ -45,7 +53,7 @@ class RescueAwardController extends Controller
                 'award' => $award,
             ];
 
-            dd(Mail::to($customer->email)->send(new RescueAwardMail($dataMail)));
+            Mail::to($customer->email)->send(new RescueAwardMail($dataMail));
 
             return response()->json([
                 'data' => [

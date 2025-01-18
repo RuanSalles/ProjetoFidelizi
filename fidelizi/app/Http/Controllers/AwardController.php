@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AwardCollection;
 use App\Models\Award;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class AwardController extends Controller
     {
         $awards = Award::all();
 
-        return response()->json($awards, 200);
+        return response()->json(new AwardCollection($awards), 200);
     }
 
     /**

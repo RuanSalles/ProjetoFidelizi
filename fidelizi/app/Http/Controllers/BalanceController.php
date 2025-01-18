@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BalanceCollection;
 use App\Models\Balance;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BalanceController extends Controller
 {
     public function index()
     {
-        return response()->json(Balance::all(), 200);
+        return response()->json(new BalanceCollection(Balance::all()), 200);
     }
 
     public function balanceListForCustomer($id)

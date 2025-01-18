@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TransactionCollection;
 use App\Mail\TransactionMail;
 use App\Models\Balance;
 use App\Models\Customer;
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Mail;
 
 class TransactionController extends Controller
 {
+
+    public function index()
+    {
+        return response()->json(new TransactionCollection(Transaction::all()));
+    }
     public function store(Request $request)
     {
 
