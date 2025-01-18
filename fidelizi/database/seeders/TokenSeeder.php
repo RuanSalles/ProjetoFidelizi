@@ -47,7 +47,7 @@ class TokenSeeder extends Seeder
             $user = User::create([
                 'name' => $token['name'],
                 'email' => $token['email'],
-                'password' => Hash::make($token['password']),
+                'password' => $token['password'],
             ]);
 
             $user->tokens()->create([

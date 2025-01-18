@@ -6,8 +6,30 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\RescueAwardController;
 use App\Http\Controllers\TransactionController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\PersonalAccessToken;
 
+Route::post('/login', function (Request $request) {
+
+    $credentials = $request->only('email', 'password');
+
+    if(Auth::attempt($credentials)) {
+        $user = $request->user();
+        return response()->json([
+            'user' => $user,
+            'token' => $user->tokens()->pluck('name')->first(),
+        ]);
+    }
+
+    return response(json_encode([
+        'status' => 'error',
+        'message' => 'Usuário inválido',
+    ]), 404);
+});
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/customers/{id}/activate', [CustomerController::class, 'activateCustomer'])->middleware(['auth:sanctum', 'abilities:client-create']);
