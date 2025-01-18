@@ -17,7 +17,7 @@ class MailController extends Controller
 
         foreach ($customers as $customer) {
             if($customer->points >= $awards[0]['points_value']) {
-                dd(Mail::to($customer->email)->send(new RememberRescueMail($customer)));
+                Mail::to($customer->email)->send(new RememberRescueMail($customer));
             }
         }
     }
