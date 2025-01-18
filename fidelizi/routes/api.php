@@ -49,7 +49,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/balances/list-for-customer/{id}', [BalanceController::class, 'balanceListForCustomer'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::post('/rescue-awards', [RescueAwardController::class, 'store']);
     Route::get('/rescue-awards', [RescueAwardController::class, 'index']);
-    Route::get('remember-mail', [MailController::class, 'sendRememberRescueMail']);
 });
 
 
