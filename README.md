@@ -1,5 +1,5 @@
 # Programa de Fidelidade Fidelizi
-<img src="docs/fidelizi-logo.png" width="70px">
+<img src="/fidelizi/docs/fidelizi-logo.png" width="70px">
 
 ## Tecnologias e ferramentas
 
