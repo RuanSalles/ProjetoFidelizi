@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
       $this->call([
 //          UserSeeder::class,
           AwardSeeder::class,
-          TokenSeeder::class
+          TokenSeeder::class,
+          CustomerSeeder::class,
       ]);
     }
 }

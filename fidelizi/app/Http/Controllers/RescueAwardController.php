@@ -18,9 +18,7 @@ class RescueAwardController extends Controller
 
     public function index()
     {
-        return response([
-            'data' => new RescueAwardCollection(RescueAward::all()),
-        ]);
+        return response()->json(new RescueAwardCollection(RescueAward::all()), 200);
     }
     public function store(Request $request): JsonResponse
     {

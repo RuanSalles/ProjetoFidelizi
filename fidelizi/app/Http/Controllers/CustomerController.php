@@ -17,7 +17,7 @@ class CustomerController extends Controller
         try {
             $customers = Customer::when(isset($request->active) && $request->active == 1, function ($query) {
                 return $query->where('active', true);
-            })->simplePaginate(20);
+            })->simplePaginate(10);
 
             if (!isset($customers)) {
                 throw new \Exception("Não foram encontrados registros");
