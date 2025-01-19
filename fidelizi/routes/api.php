@@ -34,21 +34,21 @@ Route::post('/login', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/customers/{id}/activate', [CustomerController::class, 'activateCustomer'])->middleware(['auth:sanctum', 'abilities:client-create']);
     Route::get('/customers/{id}/deactivate', [CustomerController::class, 'deactivateCustomer'])->middleware(['auth:sanctum', 'abilities:client-create']);
-    Route::get('/customers', [CustomerController::class, 'index'])->middleware(['auth:sanctum', 'abilities:client-index']);
-    Route::get('/customers/{id}', [CustomerController::class, 'show'])->middleware(['auth:sanctum', 'abilities:client-show']);
-    Route::post('/customers', [CustomerController::class, 'store']);
+    Route::get('/customers', [CustomerController::class, 'index'])->middleware(['auth:sanctum', 'abilities:client-index'])->middleware(['auth:sanctum', 'abilities:client-index']);
+    Route::get('/customers/{id}', [CustomerController::class, 'show'])->middleware(['auth:sanctum', 'abilities:client-show'])->middleware(['auth:sanctum', 'abilities:client-show']);
+    Route::post('/customers', [CustomerController::class, 'store'])->middleware('permission:client-create');
     Route::get('/customers/{id}/balance', [BalanceController::class, 'reportBalance'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::get('/customers/{id}/get-points', [CustomerController::class, 'getPoints'])->middleware(['auth:sanctum', 'abilities:balance-get']);
-    Route::put('/customers/{id}/add-points', [CustomerController::class, 'addPoints']);
-    Route::put('/customers/{id}/debit-points', [CustomerController::class, 'debitPoints']);
-    Route::get('/awards', [AwardController::class, 'index']);
-    Route::get('/awards/{id}', [AwardController::class, 'show']);
+    Route::put('/customers/{id}/add-points', [CustomerController::class, 'addPoints'])->middleware(['auth:sanctum', 'abilities:client-create']);
+    Route::put('/customers/{id}/debit-points', [CustomerController::class, 'debitPoints'])->middleware(['auth:sanctum', 'abilities:client-create']);
+    Route::get('/awards', [AwardController::class, 'index'])->middleware(['auth:sanctum', 'abilities:client-create']);
+    Route::get('/awards/{id}', [AwardController::class, 'show'])->middleware(['auth:sanctum', 'abilities:client-create']);
     Route::post('/transactions', [TransactionController::class, 'store'])->middleware(['auth:sanctum', 'abilities:point-create']);
     Route::get('/transactions', [TransactionController::class, 'index'])->middleware(['auth:sanctum', 'abilities:point-create']);
     Route::get('/balances', [BalanceController::class, 'index'])->middleware(['auth:sanctum', 'abilities:point-index']);
     Route::get('/balances/list-for-customer/{id}', [BalanceController::class, 'balanceListForCustomer'])->middleware(['auth:sanctum', 'abilities:point-index']);
-    Route::post('/rescue-awards', [RescueAwardController::class, 'store']);
-    Route::get('/rescue-awards', [RescueAwardController::class, 'index']);
+    Route::post('/rescue-awards', [RescueAwardController::class, 'store'])->middleware('auth:sanctum', 'abilities:prize-get');
+    Route::get('/rescue-awards', [RescueAwardController::class, 'index'])->middleware('auth:sanctum', 'abilities:prize-get');
 });
 
 
