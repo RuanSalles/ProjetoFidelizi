@@ -1,66 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Programa de Fidelidade Fidelizi
+<img src="docs/fidelizi-logo.png" width="70px">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Tecnologias e ferramentas
 
-## About Laravel
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![PhpStorm](https://img.shields.io/badge/phpstorm-143?style=for-the-badge&logo=phpstorm&logoColor=black&color=black&labelColor=darkorchid)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Objetivo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Desenvolver sistema de gestão de programa de fidelidade, com possibilidade de cadastro de usuários / clientes, produtos e prêmios que, ao realizar compras, gerem pontuações e possibilitem posteriormente o resgate dos mesmos.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Entidades
 
-## Learning Laravel
+- **User (usuário)**
+- **Customer (cliente)**
+- **Award (prêmio / resgatável)**
+- **Transaction (transação)**
+- **RescueAward (resgate de prêmios / resgatáveis)**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### História do usuário (Storytelling)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Um cliente chega ao estabelecimento X, que atua no ramo de varejo, desejando realizar a compra de 2 (dois) celulares, no valor de R\$ 1.800,00 reais, onde prontamente o atendente indica que ao realizar o cadastro e adquirir o cartão da loja, o mesmo poderá usufruir do programa de fidelidade. Onde tem como benefício que em suas compras realizadas será gerado 1 (um) ponto para cada R\$ 5,00 reais gastos, totalizando um valor de R\$ 3.600,00 reais. No momento da efetivação da compra, deverá ser pontuado e enviado ao mesmo através de email relatório que conste a transação, quantidade de pontos conquistados, além de demonstrativo onde conste o total de pontos atuais após a nova compra.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+O cliente, ao adquirir e começar a usufruir do programa em questão, pontuou o total de 720 pontos, que posteriormente foram gastos para adquirir o prêmio de 10% de desconto na próxima compra.
 
-## Laravel Sponsors
+Onde, por fim, o cliente receberá diariamente lembretes com indicações de premiações que podem ser resgatadas com seus pontos restantes.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+### Problema
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. Cadastrar cliente
+2. Pontuar através das compras
+3. Enviar relatórios de transações por email
+4. Resgatar premiações com débito dos pontos acumulados
+5. Receber extrato do resgate informando pontos gastos e atuais
+6. Receber lembrete diário para resgate de premiações com seus pontos restantes
 
-## Contributing
+### Solução
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+O projeto realizado em questão, trata-se de teste técnico para processo seletivo da empresa Fidelizi, onde foi desenvolvido sistema de gestão de programa de fidelidade, afim de facilitar a interação entre cliente / loja. Criando um sistema de pontuações que beneficie o cliente gerando pontuações em cada compra.
 
-## Code of Conduct
+A técnologia utilizada no projeto foi PHP para criação de APIRest utilizando Framework Laravel 11, com MySQL para persistência dos dados.
+Utilizando-se dos seguintes recursos:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Autenticação JWT - Sanctum
+- Eloquent Model
+- Resources
+- Request Validation
+- Collections
+- Mail
+- Schedule
+- Seeders
+- Factory
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
